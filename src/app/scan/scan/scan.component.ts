@@ -43,7 +43,7 @@ export class ScanComponent implements OnInit {
     }
 
 
-    @ViewChildren('emailInputs') inputsProduct:  QueryList<ElementRef>;
+    @ViewChildren('inputsProduct') inputsProduct:  QueryList<ElementRef>;
     add(elementName: any) {
         this.inputsProduct.changes.pipe(take(1)).subscribe({
             next: changes => changes.first.nativeElement.focus()
@@ -80,7 +80,7 @@ export class ScanComponent implements OnInit {
     checkProduct(event) {
         const productValue = event.value;
         const countInBox = productValue.countInBox;
-        console.log(countInBox);
+
         this.clearForm();
         for (let i = 0; i < countInBox; i++) {
             this.add(this.additionalDocElements);
