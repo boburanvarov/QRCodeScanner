@@ -41,6 +41,7 @@ export class ScanComponent implements OnInit {
         this.additionalDocElements.removeAt(index);
     }
 
+
     @ViewChildren('emailInputs') emailInputs:  QueryList<ElementRef>;
     add(elementName: any) {
         this.emailInputs.changes.pipe(take(1)).subscribe({
