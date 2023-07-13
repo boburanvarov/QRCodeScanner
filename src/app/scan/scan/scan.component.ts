@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from 
 import {FormArray, FormBuilder, Validators} from '@angular/forms';
 import {GoodsService} from '../../mains/Shared/Services/goods/goods.service';
 import {take} from 'rxjs/operators';
+import { log } from 'console';
 
 @Component({
     selector: 'app-scan',
@@ -18,6 +19,7 @@ export class ScanComponent implements OnInit {
         private fb: FormBuilder,
         private scanService: GoodsService
     ) {
+     
     }
 
     goodsForm = this.fb.group({
@@ -42,12 +44,22 @@ export class ScanComponent implements OnInit {
 
     }
 
+    focusLast(){
+        this.inputsProduct.changes.pipe(take(1)).subscribe({
+            next: changes => changes.last.nativeElement.focus()
+        });
+    }
 
-    @ViewChildren('inputsProduct') inputsProduct:  QueryList<ElementRef>;
-    add(elementName: any) {
+    focusFirst(){
         this.inputsProduct.changes.pipe(take(1)).subscribe({
             next: changes => changes.first.nativeElement.focus()
         });
+    }
+
+
+    @ViewChildren('inputsProduct') inputsProduct:  QueryList<ElementRef>;
+    add(elementName: any) {
+       
         elementName.push(this.newAdditionalDoc());
     }
 
@@ -64,7 +76,8 @@ export class ScanComponent implements OnInit {
     }
 
     create() {
-
+        console.log(this.additionalDocElements);
+            
     }
 
     getGoods() {
@@ -76,21 +89,38 @@ export class ScanComponent implements OnInit {
     clearForm(){
         this.additionalDocElements.clear();
     }
-
+    countInBoxN!:any;
     checkProduct(event) {
         const productValue = event.value;
-        const countInBox = productValue.countInBox;
+        // const countInBox = productValue.countInBox;
+       this.countInBoxN = 5
 
         this.clearForm();
-        for (let i = 0; i < countInBox; i++) {
-            this.add(this.additionalDocElements);
-        }
+        this.focusFirst()
+        this.add(this.additionalDocElements);
+     
+        // for (let i = 0; i < this.countInBoxN; i++) {
+        //     this.add(this.additionalDocElements);
+        // }
     }
 
 
 
-    onKey(event: any) {
-        this.barcode = event.target.value;
-    }
+    onKey() {
+        // 13-enter
+        // 9-tab
+        
+          const formLength = this.additionalDocElements.value.length
+         
+                if(this.countInBoxN != formLength){
+                    this.focusLast()
+                    this.add(this.additionalDocElements);
+                  }else{
+                    return
+                  }
+            }
+            
+        // this.barcode = event.target.value;
+    
 
 }

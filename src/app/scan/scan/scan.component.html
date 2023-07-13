@@ -3,7 +3,7 @@
         <div class="main-block">
             <div class="block">
                 <label>Name</label>
-              <p-dropdown [options]="products" (onChange)="checkProduct($event)"
+              <p-dropdown [options]="products" (click)="checkProduct($event)"
                             optionLabel="name"
                             placeholder="Select  Relationship"
                             formControlName="name"
@@ -35,7 +35,8 @@
 
                 <div class="group-item">
                     <label for="name">Product Scan - {{index + 1}}</label>
-                    <input #inputsProduct id="name" type="text" pInputText formControlName="name" (window:keypress)="onKey($event)"  />
+                    <input #inputsProduct id="name" type="text" pInputText formControlName="name"
+                  />
 <!--                    <small class="p-invalid"-->
 <!--                           *ngIf="-->
 <!--                      items.get('name')?.errors &&-->
