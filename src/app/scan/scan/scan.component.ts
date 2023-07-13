@@ -39,14 +39,15 @@ export class ScanComponent implements OnInit {
 
     deleteItem(index: number, elementName: any) {
         this.additionalDocElements.removeAt(index);
+
     }
 
 
-    @ViewChildren('emailInputs') emailInputs:  QueryList<ElementRef>;
+    @ViewChildren('emailInputs') inputsProduct:  QueryList<ElementRef>;
     add(elementName: any) {
-        this.emailInputs.changes.pipe(take(1)).subscribe({
+        this.inputsProduct.changes.pipe(take(1)).subscribe({
             next: changes => changes.first.nativeElement.focus()
-        })
+        });
         elementName.push(this.newAdditionalDoc());
     }
 
@@ -72,12 +73,15 @@ export class ScanComponent implements OnInit {
         });
     }
 
+    clearForm(){
+        this.additionalDocElements.clear();
+    }
+
     checkProduct(event) {
         const productValue = event.value;
         const countInBox = productValue.countInBox;
         console.log(countInBox);
-
-
+        this.clearForm();
         for (let i = 0; i < countInBox; i++) {
             this.add(this.additionalDocElements);
         }
