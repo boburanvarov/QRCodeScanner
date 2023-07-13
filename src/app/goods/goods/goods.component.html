@@ -1,0 +1,16 @@
+
+<div class="p-card">
+    <form [formGroup] = "goodsForm">
+        <div class="main-block">
+            <div class="block">
+                <label>Count InBox</label>
+                <p-inputNumber inputId="integeronly"  formControlName="countInBox"> </p-inputNumber>
+            </div>
+            <div class="block">
+                <label>Name</label>
+                <input pInputText formControlName="name">
+            </div>
+            <button pButton label="Send" (click)="create()"></button>
+        </div>
+    </form>
+</div>

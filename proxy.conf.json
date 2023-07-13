@@ -1,0 +1,37 @@
+{
+    "/paymo": {
+        "target": "http://192.168.70.91:9090/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/paymo": ""
+        }
+    },
+    "/auth": {
+        "target": "http://192.168.70.91:9090/paymo/",
+        "secure": true,
+        "changeOrigin": false,
+        "logLevel": "debug"
+    },
+    "/nci": {
+        "target": "http://192.168.70.91:9090/paymo/",
+        "secure": true,
+        "changeOrigin": false,
+        "logLevel": "debug"
+    },
+    "/payroll": {
+        "target": "http://192.168.70.65:8995",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/payroll": ""
+        }
+    }
+}
+
+
+
+
+

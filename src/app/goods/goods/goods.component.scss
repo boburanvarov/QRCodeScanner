@@ -1,0 +1,17 @@
+.main-block{
+
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    .block{
+        label{
+            width: 100%;
+        }
+    }
+    button{
+        margin-top: 20px;
+        width: 100px;
+        height: 40px;
+        text-align: center;
+    }
+}

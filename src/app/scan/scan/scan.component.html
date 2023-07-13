@@ -1,0 +1,63 @@
+<div class="p-card main-card">
+    <form [formGroup]="goodsForm">
+        <div class="main-block">
+            <div class="block">
+                <label>Name</label>
+              <p-dropdown [options]="products" (onChange)="checkProduct($event)"
+                            optionLabel="name"
+                            placeholder="Select  Relationship"
+                            formControlName="name"
+                            [ngClass]="{'invalid' :  goodsForm.get('name')?.errors &&
+                                           goodsForm.get('name')?.touched}">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value" *ngIf="goodsForm.get('name')?.value">
+                            <span>{{countInBox}}</span> -
+                            <span>{{name}}</span>
+                        </div>
+                    </ng-template>
+                    <ng-template let-relativ pTemplate="item">
+                        <div class="country-item">
+                            <span>{{relativ?.countInBox }}</span> -
+                            <span>{{relativ?.name }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </form>
+
+    <form [formGroup]="additionalDoc">
+        <div formArrayName="additionalDocElements">
+            <div class="box2"
+                 *ngFor="let items of additionalDocElements.controls; let index = index"
+                 [formGroupName]="index">
+
+
+                <div class="group-item">
+                    <label for="name">Product Scan - {{index + 1}}</label>
+                    <input #emailInputs id="name" type="text" pInputText formControlName="name" (window:keypress)="onKey($event)"  />
+<!--                    <small class="p-invalid"-->
+<!--                           *ngIf="-->
+<!--                      items.get('name')?.errors &&-->
+<!--                      items.get('name')?.touched"-->
+<!--                    >Поле обязателен</small>-->
+                </div>
+
+
+<!--                <div class="delete-block">-->
+<!--                    <button pButton pRipple type="button" icon="pi pi-times"-->
+<!--                            class="p-button-rounded p-button-danger"-->
+<!--                            (click)="deleteItem(index, additionalDocElements)"></button>-->
+
+<!--                </div>-->
+
+            </div>
+        </div>
+
+    </form>
+<!--    <div class="add-block">-->
+<!--        <button pButton pRipple type="button" icon="pi pi-plus"-->
+<!--                (click)="add(additionalDocElements)"></button>-->
+<!--    </div>-->
+    <button pButton label="Send" (click)="create()"></button>
+</div>
